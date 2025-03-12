@@ -4,53 +4,481 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/styles.css">
     <title>Home</title>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+        
+        /* Header styling */
+        header {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            padding: 3rem 0;
+            border-radius: 0 0 25px 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        header h1 {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .marquee-container {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            padding: 5px 10px;
+            margin: 15px auto;
+            max-width: 800px;
+        }
+        
+        /* Card styling */
+        .card {
+            border-radius: 15px;
+            overflow: hidden;
+            border: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top {
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .card-title {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .card-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            border: none;
+            border-radius: 50px;
+            padding: 8px 20px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3a40a5, #7a80e8);
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(78, 84, 200, 0.3);
+        }
+        
+        /* Section styling */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            border-radius: 3px;
+        }
+        
+        /* Stats section */
+        .stats-section {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            padding: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px 10px;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4e54c8;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-weight: 500;
+        }
+        
+        /* Testimonial section */
+        .testimonial {
+            background-color: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .author-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .author-info h5 {
+            margin: 0;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+        
+        .author-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #777;
+        }
+        
+        /* Footer styling */
+        footer {
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            color: white;
+            padding: 50px 0 20px;
+            margin-top: 50px;
+            border-radius: 25px 25px 0 0;
+        }
+        
+        .footer-heading {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            list-style: none;
+            padding: 0;
+            display: flex;
+        }
+        
+        .social-links li {
+            margin-right: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.2);
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .social-links a:hover {
+            background-color: white;
+            color: #4e54c8;
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+    </style>
 </head>
 <body>
     <!-- Header dengan Background -->
-    <header class="bg-primary text-white text-center py-5">
+    <header class="text-white text-center">
         <div class="container">
             <h1 class="display-4">Welcome to P4 Courses</h1>
             <p class="lead">Temukan kursus terbaik untuk meningkatkan keterampilan Anda.</p>
-            <form action="/search" method="GET" class="mt-4">
-                <div class="input-group">
-                    <input type="text" id="searchInput" name="query" class="form-control" placeholder="Search courses..." value="<%= typeof query !== 'undefined' ? query : '' %>">
-                    <div class="input-group-append">
-                        <button class="btn btn-light" type="submit">Search</button>
-                        <a href="/" class="btn btn-danger ml-2">Reset</a>
-                    </div>
-                </div>
-            </form>
             <div class="marquee-container mt-3">
                 <marquee behavior="scroll" direction="left" scrollamount="3">
                     Selamat datang di P4 Courses! Nikmati kursus terbaik dari kami. Daftar sekarang dan mulailah belajar! Semoga harimu menyenangkan!
                 </marquee>
             </div>
+            <form action="/search" method="GET" class="mt-4 search-container">
+                <div class="input-group">
+                    <input type="text" id="searchInput" name="query" class="form-control" placeholder="Search course..." value="<%= typeof query !== 'undefined' ? query : '' %>">
+                    <div class="input-group-append">
+                        <button class="btn btn-light" type="submit"><i class="fas fa-search"></i> Search</button>
+                        <a href="/" class="btn btn-danger ml-2"><i class="fas fa-times"></i> Reset</a>
+                    </div>
+                </div>
+            </form>
         </div>
     </header>
 
+    <!-- Highlight Section -->
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                    <i class="fas fa-graduation-cap text-primary mb-3" style="font-size: 2.5rem;"></i>
+                    <h3 class="h5 font-weight-bold">Kursus Berkualitas</h3>
+                    <p class="text-muted mb-0">Materi pembelajaran terbaik dari instruktur profesional</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                    <i class="fas fa-laptop-code text-primary mb-3" style="font-size: 2.5rem;"></i>
+                    <h3 class="h5 font-weight-bold">Belajar Dimana Saja</h3>
+                    <p class="text-muted mb-0">Akses materi kapan saja dan di mana saja</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="text-center p-4 bg-white rounded-lg shadow-sm">
+                    <i class="fas fa-certificate text-primary mb-3" style="font-size: 2.5rem;"></i>
+                    <h3 class="h5 font-weight-bold">Sertifikat Resmi</h3>
+                    <p class="text-muted mb-0">Dapatkan sertifikat keahlian setelah menyelesaikan kursus</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Daftar Kursus -->
     <div class="container mt-5">
-        <h2 class="mb-4">Courses</h2>
+        <h2 class="section-title">Courses Terbaik Kami</h2>
         <div class="row" id="coursesRow">
             <% courses.forEach(course => { %>
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <img src="<%= course.image_url %>" class="card-img-top" alt="<%= course.title %>">
+                    <div class="card h-100">
+                        <div class="position-relative">
+                            <img src="<%= course.image_url %>" class="card-img-top" alt="<%= course.title %>">
+                            <span class="badge badge-pill badge-primary position-absolute" style="top: 10px; right: 10px;">Populer</span>
+                        </div>
                         <div class="card-body">
                             <h5 class="card-title"><%= course.title %></h5>
+                            <div class="d-flex align-items-center mb-2">
+                                <i class="fas fa-star text-warning mr-1"></i>
+                                <i class="fas fa-star text-warning mr-1"></i>
+                                <i class="fas fa-star text-warning mr-1"></i>
+                                <i class="fas fa-star text-warning mr-1"></i>
+                                <i class="fas fa-star-half-alt text-warning mr-1"></i>
+                                <span class="text-muted ml-1">(4.5)</span>
+                            </div>
                             <p class="card-text"><%= course.description %></p>
                         </div>
                         <div class="card-footer bg-transparent border-top-0">
-                            <a href="/courses/<%= course.id %>" class="btn btn-primary btn-block">View Course</a>
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-users text-muted mr-2"></i>
+                                    <span class="text-muted">240+ siswa</span>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-clock text-muted mr-2"></i>
+                                    <span class="text-muted">18 jam</span>
+                                </div>
+                            </div>
+                            <a href="/courses/<%= course.id %>" class="btn btn-primary btn-block">
+                                <i class="fas fa-eye mr-2"></i> View Course
+                            </a>
                         </div>
                     </div>
                 </div>
             <% }) %>
         </div>
     </div>
+
+    <!-- Stats Section -->
+    <div class="container">
+        <div class="stats-section">
+            <div class="row">
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Pelajar Aktif</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Kursus Tersedia</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Instruktur Ahli</div>
+                </div>
+                <div class="col-md-3 stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Tingkat Kepuasan</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonial Section -->
+    <div class="container mt-5">
+        <h2 class="section-title">Apa Kata Mereka</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Kursus dari P4 sangat membantu saya mendapatkan pekerjaan sebagai web developer. Materinya lengkap dan mudah dipahami."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="User avatar">
+                        </div>
+                        <div class="author-info">
+                            <h5>Ahmad Rizky</h5>
+                            <p>Web Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Instruktur sangat profesional dan selalu membantu ketika saya mengalami kesulitan. Sangat direkomendasikan!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="User avatar">
+                        </div>
+                        <div class="author-info">
+                            <h5>Siti Nurhaliza</h5>
+                            <p>UI/UX Designer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="testimonial">
+                    <p class="testimonial-text">"Saya berhasil mengembangkan aplikasi pertama saya setelah mengikuti kursus mobile development di P4 Courses."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <img src="/api/placeholder/100/100" alt="User avatar">
+                        </div>
+                        <div class="author-info">
+                            <h5>Budi Santoso</h5>
+                            <p>Mobile Developer</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Call to Action -->
+    <div class="container mt-5">
+        <div class="bg-primary text-white p-5 rounded-lg text-center">
+            <h2 class="mb-3">Siap untuk Meningkatkan Keterampilan Anda?</h2>
+            <p class="lead mb-4">Bergabunglah dengan ribuan siswa yang telah berhasil mengembangkan karir mereka bersama kami.</p>
+            <button class="btn btn-light btn-lg px-5">Daftar Sekarang</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-heading">P4 Courses</h5>
+                    <p class="text-light mb-4">Platform pembelajaran online terbaik untuk meningkatkan keterampilan dan mengembangkan karir Anda.</p>
+                    <ul class="social-links">
+                        <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                        <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Kategori</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Web Development</a></li>
+                        <li><a href="#">Mobile Apps</a></li>
+                        <li><a href="#">Data Science</a></li>
+                        <li><a href="#">UI/UX Design</a></li>
+                        <li><a href="#">Business & Marketing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Tentang Kami</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">Profil Perusahaan</a></li>
+                        <li><a href="#">Tim Instruktur</a></li>
+                        <li><a href="#">Karir</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Hubungi Kami</a></li>
+                    </ul>
+                </div>
+                
+                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                    <h5 class="footer-heading">Bantuan</h5>
+                    <ul class="footer-links">
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Syarat & Ketentuan</a></li>
+                        <li><a href="#">Kebijakan Privasi</a></li>
+                        <li><a href="#">Bantuan Teknis</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 P4 Courses. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
         $(document).ready(function() {
@@ -65,14 +493,37 @@
                         response.courses.forEach(course => {
                             const card = `
                                 <div class="col-md-4 mb-4">
-                                    <div class="card h-100 shadow-sm">
-                                        <img src="${course.image_url}" class="card-img-top" alt="${course.title}">
+                                    <div class="card h-100">
+                                        <div class="position-relative">
+                                            <img src="${course.image_url}" class="card-img-top" alt="${course.title}">
+                                            <span class="badge badge-pill badge-primary position-absolute" style="top: 10px; right: 10px;">Populer</span>
+                                        </div>
                                         <div class="card-body">
                                             <h5 class="card-title">${course.title}</h5>
+                                            <div class="d-flex align-items-center mb-2">
+                                                <i class="fas fa-star text-warning mr-1"></i>
+                                                <i class="fas fa-star text-warning mr-1"></i>
+                                                <i class="fas fa-star text-warning mr-1"></i>
+                                                <i class="fas fa-star text-warning mr-1"></i>
+                                                <i class="fas fa-star-half-alt text-warning mr-1"></i>
+                                                <span class="text-muted ml-1">(4.5)</span>
+                                            </div>
                                             <p class="card-text">${course.description}</p>
                                         </div>
                                         <div class="card-footer bg-transparent border-top-0">
-                                            <a href="/courses/${course.id}" class="btn btn-primary btn-block">View Course</a>
+                                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-users text-muted mr-2"></i>
+                                                    <span class="text-muted">240+ siswa</span>
+                                                </div>
+                                                <div class="d-flex align-items-center">
+                                                    <i class="fas fa-clock text-muted mr-2"></i>
+                                                    <span class="text-muted">18 jam</span>
+                                                </div>
+                                            </div>
+                                            <a href="/courses/${course.id}" class="btn btn-primary btn-block">
+                                                <i class="fas fa-eye mr-2"></i> View Course
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
